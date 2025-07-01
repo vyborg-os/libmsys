@@ -32,7 +32,7 @@ function Signup() {
     
     try {
       // Call the API to register the user
-      const response = await axios.post('http://localhost:8085/api/users/register', {
+      const response = await axios.post('https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api/users/register', {
         username,
         email,
         password

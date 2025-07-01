@@ -5,7 +5,7 @@
 const axios = require('axios');
 
 // Configuration
-const API_URL = 'http://localhost:8085/api';
+const API_URL = 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api';
 const BOOK_ID = 1;
 
 // Create a test date (2 weeks from now)
