@@ -15,7 +15,7 @@ const port = process.env.PORT || 5000;
 // Middleware
 // Configure CORS to allow requests from any origin
 app.use(cors({
-  origin: 'https://libmsys-mrez.vercel.app', // Your frontend URL
+  origin: 'https://libmsys-v6xv.vercel.app', // Your frontend URL
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
