@@ -22,6 +22,8 @@ const port = process.env.PORT || 5000;
 // }));
 
 const allowedOrigins = [
+  '*',
+  'https://libmsys-vm3h.vercel.app/',
   'https://libmsys-v6xv.vercel.app',
   'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app'
 ];
