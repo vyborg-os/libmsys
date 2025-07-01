@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Box, Alert, CircularProgress } from '@mui/material';
-import axios from 'axios';
+import api from '../services/api';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -31,8 +31,8 @@ function Signup() {
     setError('');
     
     try {
-      // Call the API to register the user
-      const response = await axios.post('https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api/users/register', {
+      // Call the API to register the user using the API service
+      const response = await api.post('/users/register', {
         username,
         email,
         password

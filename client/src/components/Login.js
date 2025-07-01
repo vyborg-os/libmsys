@@ -5,7 +5,7 @@ import {
   Chip, Divider, Paper, Tooltip
 } from '@mui/material';
 import { AdminPanelSettings, Person } from '@mui/icons-material';
-import axios from 'axios';
+import api from '../services/api';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -28,8 +28,8 @@ function Login() {
     setError('');
     
     try {
-      // Call the API to login
-      const response = await axios.post('https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api/users/login', {
+      // Call the API to login using the API service
+      const response = await api.post('/users/login', {
         username,
         password
       });
