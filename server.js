@@ -22,19 +22,21 @@ const port = process.env.PORT || 5000;
 // }));
 
 const allowedOrigins = [
-  '*',
-  'https://libmsys-vm3h.vercel.app/',
+  'https://libmsys-vm3h.vercel.app',
   'https://libmsys-v6xv.vercel.app',
   'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app'
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed'));
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      console.log('CORS blocked for origin:', origin);
+      return callback(null, false);
     }
+    return callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
