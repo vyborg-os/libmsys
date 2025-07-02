@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Always use the actual backend URL to avoid CORS issues
-const API_BASE_URL = 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api';
+// Use a relative URL for development and the actual backend URL for production
+const API_BASE_URL = '/api';
+
+// The actual backend URL (used for direct API calls if needed)
+const BACKEND_URL = 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api';
 
 
 // Create axios instance with default config
