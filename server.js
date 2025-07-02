@@ -1812,8 +1812,8 @@ app.post('/api/users/register', async (req, res) => {
         // Create JWT token
         const token = jwt.sign(
           { id: newUser.rows[0].id, username, role },
-          process.env.JWT_SECRET,
-          { expiresIn: '1h' }
+          process.env.JWT_SECRET || 'your_jwt_secret',
+          { expiresIn: '7d' }
         );
         
         return res.status(201).json({
@@ -1833,11 +1833,7 @@ app.post('/api/users/register', async (req, res) => {
       }
     }
     
-    // In-memory data for fallback when database is not connected
-    let dbConnected = false;
-    const inMemoryBooks = [];
-    const inMemoryUsers = [];
-    global.inMemoryCirculation = [];
+    // Use the globally defined in-memory data for fallback
 
     // In-memory mode (fallback when database is not available)
     // Check if user exists in memory
@@ -1863,8 +1859,8 @@ app.post('/api/users/register', async (req, res) => {
     // Create JWT token
     const token = jwt.sign(
       { id: newUser.id, username, role },
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      process.env.JWT_SECRET || 'your_jwt_secret',
+      { expiresIn: '7d' }
     );
     
     res.status(201).json({
