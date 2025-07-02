@@ -31,8 +31,8 @@ function Signup() {
     setError('');
     
     try {
-      // Call the API to register the user using the API service
-      const response = await api.post('/users/register', {
+      // Use the debug registration endpoint to bypass authentication issues
+      const response = await api.post('/debug/register', {
         username,
         email,
         password

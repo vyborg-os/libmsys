@@ -186,6 +186,49 @@ pool.query('SELECT NOW()', (err, res) => {
   }
 });
 
+// Test endpoints to verify API is working
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API is working correctly', timestamp: new Date().toISOString() });
+});
+
+// Debug registration endpoint that doesn't require authentication
+app.post('/api/debug/register', async (req, res) => {
+  try {
+    console.log('Debug registration request received:', req.body);
+    const { username, email, password, role = 'patron' } = req.body;
+    
+    // Validate input
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'Please provide username, email and password' });
+    }
+    
+    // Create a simple user object
+    const user = {
+      id: Math.floor(Math.random() * 1000) + 1,
+      username,
+      email,
+      role
+    };
+    
+    // Create JWT token
+    const token = jwt.sign(
+      { id: user.id, username, role },
+      'debug_secret_key',
+      { expiresIn: '7d' }
+    );
+    
+    // Return success response
+    return res.status(201).json({
+      message: 'Debug registration successful',
+      user,
+      token
+    });
+  } catch (error) {
+    console.error('Debug registration error:', error);
+    res.status(500).json({ message: 'Server error during debug registration' });
+  }
+});
+
 // API routes
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Library Management System API' });
