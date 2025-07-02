@@ -30,19 +30,22 @@ app.use(cors({
 
 // Add CORS headers to all responses
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://libmsys-v6xv-58uxzokxz-vyborgs-projects.vercel.app');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
 
 app.use(express.json());
 
-// Handle OPTIONS requests explicitly
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
+// Handle OPTIONS requests explicitly for all API routes
+app.options('/api/*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://libmsys-v6xv-58uxzokxz-vyborgs-projects.vercel.app');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Max-Age', '86400');
   res.sendStatus(200);
 });
 
@@ -1763,6 +1766,16 @@ app.delete('/api/users/:id', async (req, res) => {
 });
 
 // User registration endpoint
+// Specific OPTIONS handler for the registration endpoint
+app.options('/api/users/register', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://libmsys-v6xv-58uxzokxz-vyborgs-projects.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Max-Age', '86400');
+  res.sendStatus(200);
+});
+
 app.post('/api/users/register', async (req, res) => {
   try {
     const { username, email, password, role = 'patron' } = req.body;
