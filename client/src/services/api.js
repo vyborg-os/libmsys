@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Get the current server port from the environment or use the default
-// const API_BASE_URL = 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api';
-const API_BASE_URL = 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api';
+// Use a relative URL for API requests
+// This will work with the proxy configuration in package.json
+const API_BASE_URL = '/api';
 
 
 // Create axios instance with default config

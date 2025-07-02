@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api/:path*"
+    }
+  ]
+}
