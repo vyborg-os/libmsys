@@ -1,10 +1,7 @@
 import axios from 'axios';
 
-// Use the actual backend URL in production
-// In development, the proxy in package.json will handle this
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api'
-  : '/api';
+// Always use the actual backend URL to avoid CORS issues
+const API_BASE_URL = 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api';
 
 
 // Create axios instance with default config
@@ -13,7 +10,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
+  withCredentials: false, // Disable withCredentials to avoid CORS issues
 });
 
 // Add a request interceptor to include auth token
