@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// Use a relative URL for API requests
-// This will work with the proxy configuration in package.json
-const API_BASE_URL = '/api';
+// Use the actual backend URL in production
+// In development, the proxy in package.json will handle this
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://libmsys-vm3h-icvyyqzp0-vyborgs-projects.vercel.app/api'
+  : '/api';
 
 
 // Create axios instance with default config

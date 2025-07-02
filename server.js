@@ -28,9 +28,13 @@ app.use(cors({
   allowedHeaders: ['X-CSRF-Token', 'X-Requested-With', 'Accept', 'Accept-Version', 'Content-Length', 'Content-MD5', 'Content-Type', 'Date', 'X-Api-Version', 'Authorization']
 }));
 
-// Add CORS headers to all responses
+// Add CORS headers to all responses and log incoming requests
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://libmsys-v6xv-58uxzokxz-vyborgs-projects.vercel.app');
+  console.log(`Incoming request: ${req.method} ${req.path}`);
+  console.log('Request headers:', req.headers);
+  
+  // Allow all origins for now to troubleshoot
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -1356,10 +1360,12 @@ app.get('/api/notifications/user/:userId', async (req, res) => {
 // User login endpoint
 app.post('/api/users/login', async (req, res) => {
   try {
+    console.log('Login request received:', req.body);
     const { username, password } = req.body;
     
     // Validate input
     if (!username || !password) {
+      console.log('Missing username or password');
       return res.status(400).json({ message: 'Please provide username and password' });
     }
     
