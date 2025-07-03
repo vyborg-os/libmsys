@@ -31,12 +31,17 @@ function Signup() {
     setError('');
     
     try {
-      // Use the debug registration endpoint to bypass authentication issues
-      const response = await api.post('/debug/register', {
+      // Use the standard registration endpoint instead of debug endpoint
+      const response = await api.post('/users/register', {
         username,
         email,
         password
       });
+      
+      // Store the token in localStorage
+      if (response.data && response.data.token) {
+        localStorage.setItem('lmsToken', response.data.token);
+      }
       
       // Show success message
       setSuccess('Registration successful! Redirecting to login...');
